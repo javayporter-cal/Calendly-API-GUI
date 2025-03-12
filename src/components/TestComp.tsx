@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
+import MyComponent from './TestState';
 
 const ApiRequestComponent: React.FC = () => {
   const [bearerToken, setBearerToken] = useState<string>('');
   const [orgUri, setOrgUri] = useState<string>('');
   const [userUri, setUserUri] = useState<string>('');
+  const [avatarUrl, setAvatarUrl] = useState<string>('');
   const [apiResponse, setApiResponse] = useState<string>('');
   const [apiResponse2, setApiResponse2] = useState<string>('');
   const [apiResponse3, setApiResponse3] = useState<string>('');
@@ -38,6 +40,7 @@ const ApiRequestComponent: React.FC = () => {
       setApiResponse(testObj);
       setOrgUri(testObj['current_organization']);
       setUserUri(testObj['uri']);
+      setAvatarUrl(testObj['avatar_url']);
     
       console.log(data)
     } catch (err) {
@@ -145,6 +148,8 @@ const ApiRequestComponent: React.FC = () => {
 
   return (
     <div>
+      <img src={avatarUrl} alt="logo" />
+      
       {/* button for get current user */}
         <label htmlFor="bearerToken">Bearer Token:</label>
         <input
@@ -170,60 +175,34 @@ const ApiRequestComponent: React.FC = () => {
       
 
       {/* button for get scheduled events for org */}
-      <label htmlFor="bearerToken">Bearer Token:</label>
+      {/* <label htmlFor="bearerToken">Bearer Token:</label>
         <input
           type="text"
           id="bearerToken"
           value={bearerToken}
           onChange={handleTokenChange}
-        />
+        /> */}
       
       <button onClick={handleApiRequest2} disabled={loading}>
         {loading ? 'Loading...' : 'Get Scheduled Events'}
       </button>
 
       {error && <p style={{ color: 'red' }}>Error: {error}</p>}
-      <div>
-      {Object.entries(apiResponse2).map(([key, value]) => (
-        <div key={key}>
-          {key}: {JSON.stringify(value)}
-        </div>
-      ))}
-    </div>
 
     <button onClick={handleUserSchEventsApiReq} disabled={loading}>
         {loading ? 'Loading...' : 'Get User Scheduled Events'}
       </button>
 
       {error && <p style={{ color: 'red' }}>Error: {error}</p>}
-      <div>
-      {Object.entries(apiResponse3).map(([key, value]) => (
-        <div key={key}>
-          {key}: {JSON.stringify(value)}
-        </div>
-      ))}
-    </div>
 
     <button onClick={handleGetOrgUsersReq} disabled={loading}>
         {loading ? 'Loading...' : 'Get Organization Users'}
       </button>
 
       {error && <p style={{ color: 'red' }}>Error: {error}</p>}
-      <div>
-      {Object.entries(apiResponse4).map(([key, value]) => (
-        <div key={key}>
-          {Object.entries(value).map(([key, newValue]) => (
-        <div key={key}>
-          {key}: {JSON.stringify(newValue)}
-        </div>
-      ))}
-        </div>
-      ))}
-    </div>
-    <div>
       
-    </div>
-        {/* testing */}
+
+    <MyComponent data1={apiResponse4} data2={apiResponse2} data3={apiResponse3} buttonLabel1='Get Org Users' buttonLabel2='Get Org Events' buttonLabel3='Get Users Events'/>
         
     </div>
   );
