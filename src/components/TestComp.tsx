@@ -7,6 +7,7 @@ const ApiRequestComponent: React.FC = () => {
   const [apiResponse, setApiResponse] = useState<string>('');
   const [apiResponse2, setApiResponse2] = useState<string>('');
   const [apiResponse3, setApiResponse3] = useState<string>('');
+  const [apiResponse4, setApiResponse4] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -75,6 +76,36 @@ const ApiRequestComponent: React.FC = () => {
     } catch (err) {
       setError((err as Error).message);
       setApiResponse2('');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleGetOrgUsersReq = async () => {
+    setLoading(true);
+    setError(null);
+
+    try {
+      const response = await fetch(`https://api.calendly.com/organization_memberships?organization=${orgUri}`, {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${bearerToken}`,
+          'Content-Type': 'application/json',
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error(`API request failed with status ${response.status}`);
+      }
+
+      const data = await response.text();
+      setApiResponse4(data);
+      const jsonObject = JSON.parse(data);
+      const testObj = jsonObject['collection'];
+      setApiResponse4(testObj);
+    } catch (err) {
+      setError((err as Error).message);
+      setApiResponse4('');
     } finally {
       setLoading(false);
     }
@@ -162,6 +193,7 @@ const ApiRequestComponent: React.FC = () => {
         </div>
       ))}
     </div>
+    
     <button onClick={handleUserSchEventsApiReq} disabled={loading}>
         {loading ? 'Loading...' : 'Get User Scheduled Events'}
       </button>
@@ -169,6 +201,19 @@ const ApiRequestComponent: React.FC = () => {
       {error && <p style={{ color: 'red' }}>Error: {error}</p>}
       <div>
       {Object.entries(apiResponse3).map(([key, value]) => (
+        <div key={key}>
+          {key}: {JSON.stringify(value)}
+        </div>
+      ))}
+    </div>
+
+    <button onClick={handleGetOrgUsersReq} disabled={loading}>
+        {loading ? 'Loading...' : 'Get Organization Users'}
+      </button>
+
+      {error && <p style={{ color: 'red' }}>Error: {error}</p>}
+      <div>
+      {Object.entries(apiResponse4).map(([key, value]) => (
         <div key={key}>
           {key}: {JSON.stringify(value)}
         </div>
