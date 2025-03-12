@@ -70,9 +70,6 @@ const ApiRequestComponent: React.FC = () => {
       const jsonObject = JSON.parse(data);
       const testObj = jsonObject['collection'];
       setApiResponse2(testObj);
-      // console.log(apiResponse);
-      // console.log(orgUri);
-      // console.log(userUri);
     } catch (err) {
       setError((err as Error).message);
       setApiResponse2('');
@@ -193,7 +190,7 @@ const ApiRequestComponent: React.FC = () => {
         </div>
       ))}
     </div>
-    
+
     <button onClick={handleUserSchEventsApiReq} disabled={loading}>
         {loading ? 'Loading...' : 'Get User Scheduled Events'}
       </button>
@@ -215,11 +212,19 @@ const ApiRequestComponent: React.FC = () => {
       <div>
       {Object.entries(apiResponse4).map(([key, value]) => (
         <div key={key}>
-          {key}: {JSON.stringify(value)}
+          {Object.entries(value).map(([key, newValue]) => (
+        <div key={key}>
+          {key}: {JSON.stringify(newValue)}
+        </div>
+      ))}
         </div>
       ))}
     </div>
-
+    <div>
+      
+    </div>
+        {/* testing */}
+        
     </div>
   );
 };
