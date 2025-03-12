@@ -5,18 +5,20 @@ type MyComponentPropsType = {
     data1: string;
     data2: string;
     data3: string;
+    data4: string;
     buttonLabel1: string;
     buttonLabel2: string;
     buttonLabel3: string;
+    buttonLabel4: string;
     onClick?: () => void; // Optional prop
     onClick2?: () => void; // Optional prop
   };
 
 const MyComponent: React.FC<MyComponentPropsType> = (props) => {
   const [activeDiv, setActiveDiv] = useState<'div1' | 'div2'| 
-  'div3'>('div1');
+  'div3' | 'div4'>('div1');
 
-  const handleButtonClick = (divId: 'div1' | 'div2' | 'div3') => {
+  const handleButtonClick = (divId: 'div1' | 'div2' | 'div3' | 'div4') => {
     setActiveDiv(divId);
 
   };
@@ -36,6 +38,7 @@ const MyComponent: React.FC<MyComponentPropsType> = (props) => {
       <button onClick={() => handleButtonClick('div1')}>{props.buttonLabel1}</button>
       <button onClick={() => handleButtonClick('div2')}>{props.buttonLabel2}</button>
       <button onClick={() => handleButtonClick('div3')}>{props.buttonLabel3}</button>
+      <button onClick={() => handleButtonClick('div4')}>{props.buttonLabel4}</button>
 
       {activeDiv === 'div1' && (
         <div style={{ border: '1px solid black', padding: '10px', margin: '10px' }}>
@@ -87,6 +90,24 @@ const MyComponent: React.FC<MyComponentPropsType> = (props) => {
             </div>
         </div>
       )}
+
+    {activeDiv === 'div4' && (
+        <div style={{ border: '1px solid black', padding: '10px', margin: '10px' }}>
+          {/* {props.data2} */}
+          <div>
+            {Object.entries(props.data4).map(([key, value]) => (
+            <div className='data-row2' key={key}>
+                {Object.entries(value).map(([key, newValue]) => (
+            <div key={key}>
+            {key}: {JSON.stringify(newValue)}
+        </div>
+             ))}
+        </div>
+                ))}
+            </div>
+        </div>
+      )}
+
     </div>
   );
 };
