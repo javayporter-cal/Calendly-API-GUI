@@ -6,6 +6,7 @@ const ApiRequestComponent: React.FC = () => {
   const [userUri, setUserUri] = useState<string>('');
   const [apiResponse, setApiResponse] = useState<string>('');
   const [apiResponse2, setApiResponse2] = useState<string>('');
+  const [apiResponse3, setApiResponse3] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -31,15 +32,12 @@ const ApiRequestComponent: React.FC = () => {
       }
 
       const data = await response.text();
-      setApiResponse(data);
-      //console.log('the data', data);
-
       const jsonObject = JSON.parse(data);
       const testObj = jsonObject['resource'];
+      setApiResponse(testObj);
       setOrgUri(testObj['current_organization']);
       setUserUri(testObj['uri']);
     
-
       console.log(data)
     } catch (err) {
       setError((err as Error).message);
@@ -68,12 +66,49 @@ const ApiRequestComponent: React.FC = () => {
 
       const data = await response.text();
       setApiResponse2(data);
-      //console.log('the data', data);
-      console.log(orgUri);
-      console.log(userUri);
+      const jsonObject = JSON.parse(data);
+      const testObj = jsonObject['collection'];
+      setApiResponse2(testObj);
+      // console.log(apiResponse);
+      // console.log(orgUri);
+      // console.log(userUri);
     } catch (err) {
       setError((err as Error).message);
       setApiResponse2('');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+
+  const handleUserSchEventsApiReq = async () => {
+    setLoading(true);
+    setError(null);
+
+    try {
+      const response = await fetch(`https://api.calendly.com/scheduled_events?user=${userUri}`, {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${bearerToken}`,
+          'Content-Type': 'application/json',
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error(`API request failed with status ${response.status}`);
+      }
+
+      const data = await response.text();
+      setApiResponse3(data);
+      const jsonObject = JSON.parse(data);
+      const testObj = jsonObject['collection'];
+      setApiResponse3(testObj);
+      // console.log(apiResponse);
+      // console.log(orgUri);
+      // console.log(userUri);
+    } catch (err) {
+      setError((err as Error).message);
+      setApiResponse3('');
     } finally {
       setLoading(false);
     }
@@ -92,11 +127,19 @@ const ApiRequestComponent: React.FC = () => {
         />
       
       <button onClick={handleApiRequest} disabled={loading}>
-        {loading ? 'Loading...' : 'Submit API Request'}
+        {loading ? 'Loading...' : 'Get Current User'}
       </button>
 
       {error && <p style={{ color: 'red' }}>Error: {error}</p>}
-      {apiResponse}
+
+      <div>
+      {Object.entries(apiResponse).map(([key, value]) => (
+        <div key={key}>
+          {key}: {JSON.stringify(value)}
+        </div>
+      ))}
+    </div>
+      
 
       {/* button for get scheduled events for org */}
       <label htmlFor="bearerToken">Bearer Token:</label>
@@ -108,11 +151,30 @@ const ApiRequestComponent: React.FC = () => {
         />
       
       <button onClick={handleApiRequest2} disabled={loading}>
-        {loading ? 'Loading...' : 'Submit API Request'}
+        {loading ? 'Loading...' : 'Get Scheduled Events'}
       </button>
 
       {error && <p style={{ color: 'red' }}>Error: {error}</p>}
-      {apiResponse2}
+      <div>
+      {Object.entries(apiResponse2).map(([key, value]) => (
+        <div key={key}>
+          {key}: {JSON.stringify(value)}
+        </div>
+      ))}
+    </div>
+    <button onClick={handleUserSchEventsApiReq} disabled={loading}>
+        {loading ? 'Loading...' : 'Get User Scheduled Events'}
+      </button>
+
+      {error && <p style={{ color: 'red' }}>Error: {error}</p>}
+      <div>
+      {Object.entries(apiResponse3).map(([key, value]) => (
+        <div key={key}>
+          {key}: {JSON.stringify(value)}
+        </div>
+      ))}
+    </div>
+
     </div>
   );
 };
