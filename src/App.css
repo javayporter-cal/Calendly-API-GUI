@@ -18,6 +18,12 @@
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
 
+.css-i5v8s4-MuiInputBase-input-MuiOutlinedInput-input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 100px #a7b3bc inset;
+  -webkit-text-fill-color: #fff;
+  caret-color: #fff;
+}
+
 @keyframes logo-spin {
   from {
     transform: rotate(0deg);

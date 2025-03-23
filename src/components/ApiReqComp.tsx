@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
-import MyComponent from './TestState';
+import MyComponent from './ResponseTable';
 import { TableBody, TableCell, TableContainer } from '@mui/material';
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
 import TextField from '@mui/material/TextField';
-import Link from '@mui/material/Link';
 import Button from '@mui/material/Button';
 import '../index.css';
 
@@ -193,12 +192,11 @@ const MyComponentTwo: React.FC = () => {
   };
 
   return (
-    <Button variant='contained' onClick={callMultipleFunctions}>
-      Call All Functions
+    <Button variant='contained' style={{backgroundColor: '#0066ff', marginTop: '25px'}} onClick={callMultipleFunctions}>
+      Submit Requests
     </Button>
   );
 };
-
 
 
 
@@ -216,34 +214,44 @@ const MyComponentTwo: React.FC = () => {
           onChange={handleTokenChange}  />
   
       
-      <Button onClick={handleApiRequest} disabled={loading}>
+      <Button variant="outlined" style={{color: '#0066ff'}} onClick={handleApiRequest} disabled={loading}>
         {loading ? 'Loading...' : 'Get Current User'}
       </Button>
 
       
-
-      <TableContainer component={Paper}>
-        <Table sx={{ maxWidth: 650 }} aria-label="simple table">
-         
-            <TableCell>
-            {Object.entries(apiResponse).map(([key, value]) => (
-             
-              <div>
-                {key} : {JSON.stringify(value)}
-                </div>
-            ))}
-            </TableCell>
-            <img src={avatarUrl} alt="logo" />
-          <TableBody>
-            
-          </TableBody>
-        </Table>
-      </TableContainer>
+      <div>
+        <div style={{maxWidth: '700px', marginTop: '25px'}}>
+          <TableContainer component={Paper}>
+          <Table sx={{ maxWidth: 350 }} aria-label="simple table">
+          
+              <TableCell>
+              {Object.entries(apiResponse).map(([key, value]) => (
+              
+                <div>
+                  {key} : {JSON.stringify(value)}
+                  </div>
+              ))}
+              </TableCell>
+              
+            <TableBody>
+              
+            </TableBody>
+          </Table>
+          </TableContainer>
+        </div>
+        {/* <div>
+          <img src={avatarUrl} alt="logo" />
+        </div> */}
+      </div>
+      
 
       <MyComponentTwo />
       {error && <p style={{ color: 'red' }}>Error: {error}</p>}
 
-    <MyComponent data1={apiResponse4} data2={apiResponse2} data3={apiResponse3} data4={apiResponse5} buttonLabel1='Get Org Users' buttonLabel2='Get Org Events' buttonLabel3='Get Users Events' buttonLabel4='Get Org Event Types'/>
+      <div style={{marginTop: '50px'}}>
+        <MyComponent data1={apiResponse4} data2={apiResponse2} data3={apiResponse3} data4={apiResponse5} buttonLabel1='Get Org Users' buttonLabel2='Get Org Events' buttonLabel3='Get Users Events' buttonLabel4='Get Org Event Types'/>
+      </div>
+    
     
 
     </div>
