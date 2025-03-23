@@ -1,18 +1,20 @@
 // import { useState } from 'react'
 import './App.css'
-import NavHeader from './components/CalHeader'
-
+import SelectActionCard from './components/DescCards';
 import ApiRequestComponent from './components/TestComp';
-import MyComponent from './components/TestState';
+import TopStickHeader from './components/TopHeaderS';
 
 function App() {
 
   return (
     <>
-      <div>
-        <NavHeader title='Calendly API GUI'/>
+      
+        <TopStickHeader children='Calendly API GUI' />
+        <div style={{marginTop: '50px'}}>
+        <SelectActionCard />
+      </div>
+      <div style={{marginTop: '50px'}}>
         <ApiRequestComponent />
-        {/* <MyComponent data1='javay' data2='porter' /> */}
       </div>
     </>
   )

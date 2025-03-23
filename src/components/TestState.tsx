@@ -1,5 +1,10 @@
 import React, { useState } from 'react';
 import '../App.css';
+import Paper from '@mui/material/Paper';
+import { TableCell, TableContainer } from '@mui/material';
+import TableRow from '@mui/material/TableRow';
+import Table from '@mui/material/Table';
+
 
 type MyComponentPropsType = {
     data1: string;
@@ -17,21 +22,13 @@ type MyComponentPropsType = {
 const MyComponent: React.FC<MyComponentPropsType> = (props) => {
   const [activeDiv, setActiveDiv] = useState<'div1' | 'div2'| 
   'div3' | 'div4'>('div1');
+  const [page, setPage] = React.useState(0);
+  const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
   const handleButtonClick = (divId: 'div1' | 'div2' | 'div3' | 'div4') => {
     setActiveDiv(divId);
 
   };
-
-//   const handleCombinedClick1 = () => {
-//     handleButtonClick('div1');
-//     //props.onClick;
-//   }
-
-//   const handleCombinedClick2 = () => {
-//     handleButtonClick('div2');
-//     //props.onClick2;
-//   }
 
   return (
     <div>
@@ -41,71 +38,82 @@ const MyComponent: React.FC<MyComponentPropsType> = (props) => {
       <button onClick={() => handleButtonClick('div4')}>{props.buttonLabel4}</button>
 
       {activeDiv === 'div1' && (
-        <div style={{ border: '1px solid black', padding: '10px', margin: '10px' }}>
-          {/* {props.data1} */}
-        <div>
+        <div style={{padding: '10px', margin: '10px' }}>
+        <Paper sx={{ width: '100%', overflow: 'hidden' }}>
+        <TableContainer>
+        <Table stickyHeader aria-label="sticky table">
             {Object.entries(props.data1).map(([key, value]) => (
-            <div className='data-row2' key={key}>
+            
+            <TableRow key={key}>
                 {Object.entries(value).map(([key, newValue]) => (
-            <div key={key}>
-            {key}: {JSON.stringify(newValue)}
-        </div>
-             ))}
-        </div>
+            <TableCell key={key}>
+                <td>{key}: </td>
+                <td>{JSON.stringify(newValue)}</td>
+            </TableCell>
                 ))}
-            </div>
+            </TableRow>
+                    ))}
+        </Table>
+        </TableContainer>
+        </Paper>
         </div>
       )}
 
       {activeDiv === 'div2' && (
-        <div style={{ border: '1px solid black', padding: '10px', margin: '10px' }}>
-          {/* {props.data2} */}
-          <div>
-            {Object.entries(props.data2).map(([key, value]) => (
-            <div className='data-row2' key={key}>
-                {Object.entries(value).map(([key, newValue]) => (
-            <div key={key}>
-            {key}: {JSON.stringify(newValue)}
-        </div>
-             ))}
-        </div>
+        <div style={{ padding: '10px', margin: '10px' }}>
+          <TableContainer>
+        
+        {Object.entries(props.data2).map(([key, value]) => (
+        <TableRow key={key}>
+            {Object.entries(value).map(([key, newValue]) => (
+        <TableCell key={key}>
+            <td>{key}: </td>
+            <td>{JSON.stringify(newValue)}</td>
+        </TableCell>
+            ))}
+        </TableRow>
                 ))}
-            </div>
+    
+    </TableContainer>
         </div>
       )}
 
         {activeDiv === 'div3' && (
-        <div style={{ border: '1px solid black', padding: '10px', margin: '10px' }}>
-          {/* {props.data2} */}
-          <div>
-            {Object.entries(props.data3).map(([key, value]) => (
-            <div className='data-row2' key={key}>
-                {Object.entries(value).map(([key, newValue]) => (
-            <div key={key}>
-            {key}: {JSON.stringify(newValue)}
-        </div>
-             ))}
-        </div>
-                ))}
-            </div>
-        </div>
+        <div style={{ padding: '10px', margin: '10px' }}>
+        <TableContainer>
+      
+      {Object.entries(props.data3).map(([key, value]) => (
+      <TableRow key={key}>
+          {Object.entries(value).map(([key, newValue]) => (
+      <TableCell key={key}>
+          <td>{key}: </td>
+          <td>{JSON.stringify(newValue)}</td>
+      </TableCell>
+          ))}
+      </TableRow>
+              ))}
+  
+  </TableContainer>
+      </div>
       )}
 
     {activeDiv === 'div4' && (
-        <div style={{ border: '1px solid black', padding: '10px', margin: '10px' }}>
-          {/* {props.data2} */}
-          <div>
-            {Object.entries(props.data4).map(([key, value]) => (
-            <div className='data-row2' key={key}>
-                {Object.entries(value).map(([key, newValue]) => (
-            <div key={key}>
-            {key}: {JSON.stringify(newValue)}
-        </div>
-             ))}
-        </div>
-                ))}
-            </div>
-        </div>
+        <div style={{ padding: '10px', margin: '10px' }}>
+        <TableContainer>
+      
+      {Object.entries(props.data4).map(([key, value]) => (
+      <TableRow key={key}>
+          {Object.entries(value).map(([key, newValue]) => (
+      <TableCell key={key}>
+          <td>{key}: </td>
+          <td>{JSON.stringify(newValue)}</td>
+      </TableCell>
+          ))}
+      </TableRow>
+              ))}
+  
+  </TableContainer>
+      </div>
       )}
 
     </div>
@@ -113,23 +121,3 @@ const MyComponent: React.FC<MyComponentPropsType> = (props) => {
 };
 
 export default MyComponent;
-
-{/* <div>
-      {Object.entries(apiResponse4).map(([key, value]) => (
-        <div key={key}>
-          {Object.entries(value).map(([key, newValue]) => (
-        <div key={key}>
-          <table>
-            <tbody>
-            <tr>
-              <td>{key}</td>
-              <td>{JSON.stringify(newValue)}</td>
-            </tr>
-            </tbody>
-          </table>
-          {key}: {JSON.stringify(newValue)}
-        </div>
-      ))}
-        </div>
-      ))}
-    </div> */}

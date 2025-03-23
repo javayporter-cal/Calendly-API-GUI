@@ -1,5 +1,12 @@
 import React, { useState } from 'react';
 import MyComponent from './TestState';
+import { TableBody, TableCell, TableContainer } from '@mui/material';
+import Paper from '@mui/material/Paper';
+import Table from '@mui/material/Table';
+import TextField from '@mui/material/TextField';
+import Link from '@mui/material/Link';
+import Button from '@mui/material/Button';
+import '../index.css';
 
 const ApiRequestComponent: React.FC = () => {
   const [bearerToken, setBearerToken] = useState<string>('');
@@ -74,6 +81,8 @@ const ApiRequestComponent: React.FC = () => {
       const jsonObject = JSON.parse(data);
       const testObj = jsonObject['collection'];
       setApiResponse2(testObj);
+      console.log(testObj);
+      console.log(typeof testObj);
     } catch (err) {
       setError((err as Error).message);
       setApiResponse2('');
@@ -174,60 +183,69 @@ const ApiRequestComponent: React.FC = () => {
   };
 
 
+
+const MyComponentTwo: React.FC = () => {
+  const callMultipleFunctions = () => {
+    handleApiRequest2();
+    handleGetOrgUsersReq();
+    handleUserSchEventsApiReq();
+    handlGetEventTypesReq();
+  };
+
+  return (
+    <Button variant='contained' onClick={callMultipleFunctions}>
+      Call All Functions
+    </Button>
+  );
+};
+
+
+
+
   return (
     <div>
-      <img src={avatarUrl} alt="logo" />
       
       {/* button for get current user */}
-        <label htmlFor="bearerToken">Bearer Token:</label>
-        <input
+      
+        <TextField 
+          id="outlined-basic" 
+          label="Bearer Token"   
+          variant="outlined" 
           type="text"
-          id="bearerToken"
           value={bearerToken}
-          onChange={handleTokenChange}
-        />
+          onChange={handleTokenChange}  />
+  
       
-      <button onClick={handleApiRequest} disabled={loading}>
+      <Button onClick={handleApiRequest} disabled={loading}>
         {loading ? 'Loading...' : 'Get Current User'}
-      </button>
+      </Button>
 
-      {error && <p style={{ color: 'red' }}>Error: {error}</p>}
-
-      <div>
-      {Object.entries(apiResponse).map(([key, value]) => (
-        <div key={key}>
-          {key}: {JSON.stringify(value)}
-        </div>
-      ))}
-    </div>
       
-      <button onClick={handleApiRequest2} disabled={loading}>
-        {loading ? 'Loading...' : 'Get Scheduled Events'}
-      </button>
 
+      <TableContainer component={Paper}>
+        <Table sx={{ maxWidth: 650 }} aria-label="simple table">
+         
+            <TableCell>
+            {Object.entries(apiResponse).map(([key, value]) => (
+             
+              <div>
+                {key} : {JSON.stringify(value)}
+                </div>
+            ))}
+            </TableCell>
+            <img src={avatarUrl} alt="logo" />
+          <TableBody>
+            
+          </TableBody>
+        </Table>
+      </TableContainer>
+
+      <MyComponentTwo />
       {error && <p style={{ color: 'red' }}>Error: {error}</p>}
-
-    <button onClick={handleUserSchEventsApiReq} disabled={loading}>
-        {loading ? 'Loading...' : 'Get User Scheduled Events'}
-      </button>
-
-      {error && <p style={{ color: 'red' }}>Error: {error}</p>}
-
-    <button onClick={handleGetOrgUsersReq} disabled={loading}>
-        {loading ? 'Loading...' : 'Get Organization Users'}
-      </button>
-
-      {error && <p style={{ color: 'red' }}>Error: {error}</p>}
-
-      <button onClick={handlGetEventTypesReq} disabled={loading}>
-        {loading ? 'Loading...' : 'Get Organization ETs'}
-      </button>
-
-      {error && <p style={{ color: 'red' }}>Error: {error}</p>}
-      
 
     <MyComponent data1={apiResponse4} data2={apiResponse2} data3={apiResponse3} data4={apiResponse5} buttonLabel1='Get Org Users' buttonLabel2='Get Org Events' buttonLabel3='Get Users Events' buttonLabel4='Get Org Event Types'/>
-        
+    
+
     </div>
   );
 };
