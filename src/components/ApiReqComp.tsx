@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import MyComponent from './ResponseTable';
 import { TableBody, TableCell, TableContainer } from '@mui/material';
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
