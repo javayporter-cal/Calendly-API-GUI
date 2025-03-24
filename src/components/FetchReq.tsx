@@ -81,6 +81,7 @@ const FetchReq: React.FC<ApiReqPropsType> = (props) => {
   return (
     <div>
         <SubmitReq />
+        {error && <p style={{ color: 'red' }}>Error: {error}</p>}
         {isVisible && (
         <ReqResp data={apiRes} />
         )}
