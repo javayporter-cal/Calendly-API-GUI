@@ -1,4 +1,8 @@
-import React from 'react'
+import React from 'react';
+import { TableBody, TableCell} from '@mui/material';
+import TableRow from '@mui/material/TableRow';
+import Table from '@mui/material/Table';
+
 
 type DisplayPropsType = {
     currUserData: string;
@@ -7,26 +11,26 @@ type DisplayPropsType = {
 const DisplayCurrUser: React.FC<DisplayPropsType> = (props) => {
 
     const newObj = props.currUserData;
-    console.log(newObj);
-    
 
   return (
-    <div className='parent-flex-box' style={{display: 'flex', justifyContent: 'space-between', width: '55em'}}>
-        <div className='two-col-box'>
-            {Object.entries(newObj).map(([key]) =>(
-                <div className='two-col-box-rows'>
-                    {key}
-                </div>
-            ))}
-        </div>
-        <div className='two-col-box'>
-            {Object.entries(newObj).map(([key, value]) =>(
-                <div key={key} className='two-col-box-rows'>
-                    {value}
-                </div>
-            ))}
-        </div>
-    </div>
+
+    <>
+        <Table>
+                <TableBody>
+                    {Object.entries(newObj).map(([key, value]) =>(
+                        <TableRow>
+                            <TableCell>
+                                {key}
+                            </TableCell>
+                            <TableCell>
+                                {value}
+                            </TableCell>
+                        </TableRow>
+                    ))}
+                </TableBody>
+            
+        </Table>
+    </>
   )
 }
 

@@ -27,8 +27,11 @@ const FetchReq: React.FC<ApiReqPropsType> = (props) => {
 
     useEffect(() => {
         document.addEventListener('mousedown', handleClickOutside);
+        
+        
         return () => {
             document.removeEventListener('mousedown', handleClickOutside);
+            props.buttonLabel;
         };
     }, []);
     
