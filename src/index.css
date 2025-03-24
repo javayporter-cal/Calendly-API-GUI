@@ -60,6 +60,20 @@ button:focus-visible {
   caret-color: #fff;
 }
 
+.two-col-box {
+  text-align: left;
+}
+
+.two-col-box-rows {
+  margin-bottom: 0.55em;
+  font-size: 18px;
+}
+
+.parent-flex-box {
+  margin-top: 2em;
+}
+
+
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;

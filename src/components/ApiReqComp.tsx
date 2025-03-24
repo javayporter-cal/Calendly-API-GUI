@@ -6,6 +6,8 @@ import Table from '@mui/material/Table';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import '../index.css';
+import DisplayCurrUser from './DisplayCurrUser';
+import FetchReq from './FetchReq';
 
 const ApiRequestComponent: React.FC = () => {
   const [bearerToken, setBearerToken] = useState<string>('');
@@ -17,8 +19,13 @@ const ApiRequestComponent: React.FC = () => {
   const [apiResponse3, setApiResponse3] = useState<string>('');
   const [apiResponse4, setApiResponse4] = useState<string>('');
   const [apiResponse5, setApiResponse5] = useState<string>('');
+  const [userAvailSchRes, setUserAvailSchRes] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
+  
+  const getOrgMemberships: string = `https://api.calendly.com/organization_memberships?organization=${orgUri}`;
+  const getUserAvailSch: string = `https://api.calendly.com/user_availability_schedules?user=${userUri}`;
+  const getUserSchEvents: string = `https://api.calendly.com/scheduled_events?user=${userUri}`
 
   const handleTokenChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setBearerToken(event.target.value);
@@ -49,7 +56,6 @@ const ApiRequestComponent: React.FC = () => {
       setUserUri(testObj['uri']);
       setAvatarUrl(testObj['avatar_url']);
     
-      console.log(data)
     } catch (err) {
       setError((err as Error).message);
       setApiResponse('');
@@ -181,6 +187,36 @@ const ApiRequestComponent: React.FC = () => {
     }
   };
 
+  const handleAvailSchedules = async () => {
+    setLoading(true);
+    setError(null);
+
+    try {
+      const response = await fetch(`https://api.calendly.com/user_availability_schedules?user=${userUri}`, {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${bearerToken}`,
+          'Content-Type': 'application/json',
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error(`API request failed with status ${response.status}`);
+      }
+
+      const data = await response.text();
+      setUserAvailSchRes(data);
+      const jsonObject = JSON.parse(data);
+      const testObj = jsonObject['collection'];
+      setUserAvailSchRes(testObj);
+    } catch (err) {
+      setError((err as Error).message);
+      setUserAvailSchRes('');
+    } finally {
+      setLoading(false);
+    }
+  };
+
 
 
 const MyComponentTwo: React.FC = () => {
@@ -189,7 +225,10 @@ const MyComponentTwo: React.FC = () => {
     handleGetOrgUsersReq();
     handleUserSchEventsApiReq();
     handlGetEventTypesReq();
+    handleAvailSchedules();
   };
+
+  
 
   return (
     <Button variant='contained' style={{backgroundColor: '#0066ff', marginTop: '25px'}} onClick={callMultipleFunctions}>
@@ -203,9 +242,8 @@ const MyComponentTwo: React.FC = () => {
   return (
     <div>
       
-      {/* button for get current user */}
-      
         <TextField 
+          style={{ minWidth: '22em'}}
           id="outlined-basic" 
           label="Bearer Token"   
           variant="outlined" 
@@ -218,39 +256,15 @@ const MyComponentTwo: React.FC = () => {
         {loading ? 'Loading...' : 'Get Current User'}
       </Button>
 
-      
-      <div>
-        <div style={{maxWidth: '700px', marginTop: '25px'}}>
-          <TableContainer component={Paper}>
-          <Table sx={{ maxWidth: 350 }} aria-label="simple table">
-          
-              <TableCell>
-              {Object.entries(apiResponse).map(([key, value]) => (
-              
-                <div>
-                  {key} : {JSON.stringify(value)}
-                  </div>
-              ))}
-              </TableCell>
-              
-            <TableBody>
-              
-            </TableBody>
-          </Table>
-          </TableContainer>
-        </div>
-        {/* <div>
-          <img src={avatarUrl} alt="logo" />
-        </div> */}
-      </div>
-      
+      <DisplayCurrUser currUserData={apiResponse} />
 
-      <MyComponentTwo />
+      <FetchReq requestUrl={getOrgMemberships} bearerToken={bearerToken} buttonLabel='Get Organization Users' />
+      <FetchReq requestUrl={getUserAvailSch} bearerToken={bearerToken} buttonLabel="List User's Availability Schedule" />
+      <FetchReq requestUrl={getUserSchEvents} bearerToken={bearerToken} buttonLabel="Get User's Scheduled Events" />
+      
       {error && <p style={{ color: 'red' }}>Error: {error}</p>}
 
-      <div style={{marginTop: '50px'}}>
-        <MyComponent data1={apiResponse4} data2={apiResponse2} data3={apiResponse3} data4={apiResponse5} buttonLabel1='Get Org Users' buttonLabel2='Get Org Events' buttonLabel3='Get Users Events' buttonLabel4='Get Org Event Types'/>
-      </div>
+      
     
     
 

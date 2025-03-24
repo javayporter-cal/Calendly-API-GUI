@@ -10,20 +10,22 @@ import ButtonGroup from '@mui/material/ButtonGroup';
 
 type MyComponentPropsType = {
     data1: string;
-    data2: string;
-    data3: string;
-    data4: string;
+    data2?: string;
+    data3?: string;
+    data4?: string;
+    data5?: string;
     buttonLabel1: string;
-    buttonLabel2: string;
-    buttonLabel3: string;
-    buttonLabel4: string;
+    buttonLabel2?: string;
+    buttonLabel3?: string;
+    buttonLabel4?: string;
+    buttonLabel5?: string;
     onClick?: () => void; // Optional prop
     onClick2?: () => void; // Optional prop
   };
 
 const MyComponent: React.FC<MyComponentPropsType> = (props) => {
   const [activeDiv, setActiveDiv] = useState<'div1' | 'div2'| 
-  'div3' | 'div4'>('div1');
+  'div3' | 'div4' | 'div5'>('div1');
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
@@ -36,7 +38,7 @@ const MyComponent: React.FC<MyComponentPropsType> = (props) => {
     setPage(0);
   };
 
-  const handleButtonClick = (divId: 'div1' | 'div2' | 'div3' | 'div4') => {
+  const handleButtonClick = (divId: 'div1' | 'div2' | 'div3' | 'div4' | 'div5') => {
     setActiveDiv(divId);
 
   };
@@ -48,6 +50,7 @@ const MyComponent: React.FC<MyComponentPropsType> = (props) => {
             <Button style={{color: '#0066ff'}} onClick={() => handleButtonClick('div2')}>{props.buttonLabel2}</Button>
             <Button style={{color: '#0066ff'}} onClick={() => handleButtonClick('div3')}>{props.buttonLabel3}</Button>
             <Button style={{color: '#0066ff'}} onClick={() => handleButtonClick('div4')}>{props.buttonLabel4}</Button>
+            <Button style={{color: '#0066ff'}} onClick={() => handleButtonClick('div5')}>{props.buttonLabel5}</Button>
         </ButtonGroup>
 
       {activeDiv === 'div1' && (
@@ -209,6 +212,47 @@ const MyComponent: React.FC<MyComponentPropsType> = (props) => {
                 </Paper>
                 </div>
             )}
+
+        {activeDiv === 'div5' && (
+                <div style={{padding: '10px', margin: '10px' }}>
+                <Paper sx={{ width: '100%', overflow: 'hidden' }}>
+                <TableContainer sx={{ maxHeight: 440 }}>
+                <Table stickyHeader aria-label="sticky table">
+                    <TableHead>
+                    {Object.entries(props.data5).slice(0, 1).map(([key, value]) => (
+                    <TableRow key={key}>
+                        {Object.entries(value).map(([key]) => (
+                    <TableCell key={key} style={{backgroundColor: '#D3D3D3', fontWeight: 'bold'}}>
+                        <td>{key}</td>
+                    </TableCell>
+                        ))}
+                    </TableRow>
+                            ))}
+                    </TableHead>
+                    {Object.entries(props.data5).map(([key, value]) => (
+                    <TableRow key={key}>
+                        {Object.entries(value).map(([key, newValue]) => (
+                    <TableCell key={key}>
+                        <td>{JSON.stringify(newValue)}</td>
+                    </TableCell>
+                        ))}
+                    </TableRow>
+                            ))}
+                </Table>
+                </TableContainer>
+                    <TablePagination
+                    rowsPerPageOptions={[10, 25, 100]}
+                    component="div"
+                    count={(props.data5).length}
+                    rowsPerPage={rowsPerPage}
+                    page={page}
+                    onPageChange={handleChangePage}
+                    onRowsPerPageChange={handleChangeRowsPerPage}
+                    />
+                </Paper>
+                </div>
+            )}
+
 
     </div>
   );
