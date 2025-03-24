@@ -21,7 +21,7 @@ const ReqResp: React.FC<ReqRespPropsType> = (props) => {
             <TableRow key={key}>
                 {Object.entries(value).map(([key]) => (
             <TableCell key={key} style={{backgroundColor: '#D3D3D3', fontWeight: 'bold'}}>
-                <td>{key}</td>
+                {key}
             </TableCell>
                 ))}
             </TableRow>
@@ -31,7 +31,7 @@ const ReqResp: React.FC<ReqRespPropsType> = (props) => {
             <TableRow key={key}>
                 {Object.entries(value).map(([key, newValue]) => (
             <TableCell key={key}>
-                <td>{JSON.stringify(newValue)}</td>
+                {JSON.stringify(newValue)}
             </TableCell>
                 ))}
             </TableRow>

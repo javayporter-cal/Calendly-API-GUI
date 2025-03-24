@@ -21,7 +21,7 @@ const DisplayCurrUser: React.FC<DisplayPropsType> = (props) => {
         </div>
         <div className='two-col-box'>
             {Object.entries(newObj).map(([key, value]) =>(
-                <div className='two-col-box-rows'>
+                <div key={key} className='two-col-box-rows'>
                     {value}
                 </div>
             ))}

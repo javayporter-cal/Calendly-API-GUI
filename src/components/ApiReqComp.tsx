@@ -9,13 +9,13 @@ const ApiRequestComponent: React.FC = () => {
   const [bearerToken, setBearerToken] = useState<string>('');
   const [orgUri, setOrgUri] = useState<string>('');
   const [userUri, setUserUri] = useState<string>('');
-  const [avatarUrl, setAvatarUrl] = useState<string>('');
+  // const [avatarUrl, setAvatarUrl] = useState<string>('');
   const [apiResponse, setApiResponse] = useState<string>('');
-  const [apiResponse2, setApiResponse2] = useState<string>('');
-  const [apiResponse3, setApiResponse3] = useState<string>('');
-  const [apiResponse4, setApiResponse4] = useState<string>('');
-  const [apiResponse5, setApiResponse5] = useState<string>('');
-  const [userAvailSchRes, setUserAvailSchRes] = useState<string>('');
+  // const [apiResponse2, setApiResponse2] = useState<string>('');
+  // const [apiResponse3, setApiResponse3] = useState<string>('');
+  // const [apiResponse4, setApiResponse4] = useState<string>('');
+  // const [apiResponse5, setApiResponse5] = useState<string>('');
+  // const [userAvailSchRes, setUserAvailSchRes] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   
@@ -54,7 +54,7 @@ const ApiRequestComponent: React.FC = () => {
       setApiResponse(testObj);
       setOrgUri(testObj['current_organization']);
       setUserUri(testObj['uri']);
-      setAvatarUrl(testObj['avatar_url']);
+      // setAvatarUrl(testObj['avatar_url']);
     
     } catch (err) {
       setError((err as Error).message);
@@ -64,178 +64,178 @@ const ApiRequestComponent: React.FC = () => {
     }
   };
 
-  const handleApiRequest2 = async () => {
-    setLoading(true);
-    setError(null);
+  // const handleApiRequest2 = async () => {
+  //   setLoading(true);
+  //   setError(null);
 
-    try {
-      const response = await fetch(`https://api.calendly.com/scheduled_events?organization=${orgUri}`, {
-        method: 'GET',
-        headers: {
-          Authorization: `Bearer ${bearerToken}`,
-          'Content-Type': 'application/json',
-        },
-      });
+  //   try {
+  //     const response = await fetch(`https://api.calendly.com/scheduled_events?organization=${orgUri}`, {
+  //       method: 'GET',
+  //       headers: {
+  //         Authorization: `Bearer ${bearerToken}`,
+  //         'Content-Type': 'application/json',
+  //       },
+  //     });
 
-      if (!response.ok) {
-        throw new Error(`API request failed with status ${response.status}`);
-      }
+  //     if (!response.ok) {
+  //       throw new Error(`API request failed with status ${response.status}`);
+  //     }
 
-      const data = await response.text();
-      setApiResponse2(data);
-      const jsonObject = JSON.parse(data);
-      const testObj = jsonObject['collection'];
-      setApiResponse2(testObj);
-      console.log(testObj);
-      console.log(typeof testObj);
-    } catch (err) {
-      setError((err as Error).message);
-      setApiResponse2('');
-    } finally {
-      setLoading(false);
-    }
-  };
+  //     const data = await response.text();
+  //     setApiResponse2(data);
+  //     const jsonObject = JSON.parse(data);
+  //     const testObj = jsonObject['collection'];
+  //     setApiResponse2(testObj);
+  //     console.log(testObj);
+  //     console.log(typeof testObj);
+  //   } catch (err) {
+  //     setError((err as Error).message);
+  //     setApiResponse2('');
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
 
-  const handleGetOrgUsersReq = async () => {
-    setLoading(true);
-    setError(null);
+  // const handleGetOrgUsersReq = async () => {
+  //   setLoading(true);
+  //   setError(null);
 
-    try {
-      const response = await fetch(`https://api.calendly.com/organization_memberships?organization=${orgUri}`, {
-        method: 'GET',
-        headers: {
-          Authorization: `Bearer ${bearerToken}`,
-          'Content-Type': 'application/json',
-        },
-      });
+  //   try {
+  //     const response = await fetch(`https://api.calendly.com/organization_memberships?organization=${orgUri}`, {
+  //       method: 'GET',
+  //       headers: {
+  //         Authorization: `Bearer ${bearerToken}`,
+  //         'Content-Type': 'application/json',
+  //       },
+  //     });
 
-      if (!response.ok) {
-        throw new Error(`API request failed with status ${response.status}`);
-      }
+  //     if (!response.ok) {
+  //       throw new Error(`API request failed with status ${response.status}`);
+  //     }
 
-      const data = await response.text();
-      setApiResponse4(data);
-      const jsonObject = JSON.parse(data);
-      const testObj = jsonObject['collection'];
-      setApiResponse4(testObj);
-    } catch (err) {
-      setError((err as Error).message);
-      setApiResponse4('');
-    } finally {
-      setLoading(false);
-    }
-  };
-
-
-  const handleUserSchEventsApiReq = async () => {
-    setLoading(true);
-    setError(null);
-
-    try {
-      const response = await fetch(`https://api.calendly.com/scheduled_events?user=${userUri}`, {
-        method: 'GET',
-        headers: {
-          Authorization: `Bearer ${bearerToken}`,
-          'Content-Type': 'application/json',
-        },
-      });
-
-      if (!response.ok) {
-        throw new Error(`API request failed with status ${response.status}`);
-      }
-
-      const data = await response.text();
-      setApiResponse3(data);
-      const jsonObject = JSON.parse(data);
-      const testObj = jsonObject['collection'];
-      setApiResponse3(testObj);
-    } catch (err) {
-      setError((err as Error).message);
-      setApiResponse3('');
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const handlGetEventTypesReq = async () => {
-    setLoading(true);
-    setError(null);
-
-    try {
-      const response = await fetch(`https://api.calendly.com/event_types?organization=${orgUri}`, {
-        method: 'GET',
-        headers: {
-          Authorization: `Bearer ${bearerToken}`,
-          'Content-Type': 'application/json',
-        },
-      });
-
-      if (!response.ok) {
-        throw new Error(`API request failed with status ${response.status}`);
-      }
-
-      const data = await response.text();
-      setApiResponse5(data);
-      const jsonObject = JSON.parse(data);
-      const testObj = jsonObject['collection'];
-      setApiResponse5(testObj);
-    } catch (err) {
-      setError((err as Error).message);
-      setApiResponse5('');
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const handleAvailSchedules = async () => {
-    setLoading(true);
-    setError(null);
-
-    try {
-      const response = await fetch(`https://api.calendly.com/user_availability_schedules?user=${userUri}`, {
-        method: 'GET',
-        headers: {
-          Authorization: `Bearer ${bearerToken}`,
-          'Content-Type': 'application/json',
-        },
-      });
-
-      if (!response.ok) {
-        throw new Error(`API request failed with status ${response.status}`);
-      }
-
-      const data = await response.text();
-      setUserAvailSchRes(data);
-      const jsonObject = JSON.parse(data);
-      const testObj = jsonObject['collection'];
-      setUserAvailSchRes(testObj);
-    } catch (err) {
-      setError((err as Error).message);
-      setUserAvailSchRes('');
-    } finally {
-      setLoading(false);
-    }
-  };
+  //     const data = await response.text();
+  //     setApiResponse4(data);
+  //     const jsonObject = JSON.parse(data);
+  //     const testObj = jsonObject['collection'];
+  //     setApiResponse4(testObj);
+  //   } catch (err) {
+  //     setError((err as Error).message);
+  //     setApiResponse4('');
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
 
 
+  // const handleUserSchEventsApiReq = async () => {
+  //   setLoading(true);
+  //   setError(null);
 
-const MyComponentTwo: React.FC = () => {
-  const callMultipleFunctions = () => {
-    handleApiRequest2();
-    handleGetOrgUsersReq();
-    handleUserSchEventsApiReq();
-    handlGetEventTypesReq();
-    handleAvailSchedules();
-  };
+  //   try {
+  //     const response = await fetch(`https://api.calendly.com/scheduled_events?user=${userUri}`, {
+  //       method: 'GET',
+  //       headers: {
+  //         Authorization: `Bearer ${bearerToken}`,
+  //         'Content-Type': 'application/json',
+  //       },
+  //     });
+
+  //     if (!response.ok) {
+  //       throw new Error(`API request failed with status ${response.status}`);
+  //     }
+
+  //     const data = await response.text();
+  //     setApiResponse3(data);
+  //     const jsonObject = JSON.parse(data);
+  //     const testObj = jsonObject['collection'];
+  //     setApiResponse3(testObj);
+  //   } catch (err) {
+  //     setError((err as Error).message);
+  //     setApiResponse3('');
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
+
+  // const handlGetEventTypesReq = async () => {
+  //   setLoading(true);
+  //   setError(null);
+
+  //   try {
+  //     const response = await fetch(`https://api.calendly.com/event_types?organization=${orgUri}`, {
+  //       method: 'GET',
+  //       headers: {
+  //         Authorization: `Bearer ${bearerToken}`,
+  //         'Content-Type': 'application/json',
+  //       },
+  //     });
+
+  //     if (!response.ok) {
+  //       throw new Error(`API request failed with status ${response.status}`);
+  //     }
+
+  //     const data = await response.text();
+  //     setApiResponse5(data);
+  //     const jsonObject = JSON.parse(data);
+  //     const testObj = jsonObject['collection'];
+  //     setApiResponse5(testObj);
+  //   } catch (err) {
+  //     setError((err as Error).message);
+  //     setApiResponse5('');
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
+
+  // const handleAvailSchedules = async () => {
+  //   setLoading(true);
+  //   setError(null);
+
+  //   try {
+  //     const response = await fetch(`https://api.calendly.com/user_availability_schedules?user=${userUri}`, {
+  //       method: 'GET',
+  //       headers: {
+  //         Authorization: `Bearer ${bearerToken}`,
+  //         'Content-Type': 'application/json',
+  //       },
+  //     });
+
+  //     if (!response.ok) {
+  //       throw new Error(`API request failed with status ${response.status}`);
+  //     }
+
+  //     const data = await response.text();
+  //     setUserAvailSchRes(data);
+  //     const jsonObject = JSON.parse(data);
+  //     const testObj = jsonObject['collection'];
+  //     setUserAvailSchRes(testObj);
+  //   } catch (err) {
+  //     setError((err as Error).message);
+  //     setUserAvailSchRes('');
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
+
+
+
+// const MyComponentTwo: React.FC = () => {
+//   const callMultipleFunctions = () => {
+//     handleApiRequest2();
+//     handleGetOrgUsersReq();
+//     handleUserSchEventsApiReq();
+//     handlGetEventTypesReq();
+//     handleAvailSchedules();
+//   };
 
   
 
-  return (
-    <Button variant='contained' style={{backgroundColor: '#0066ff', marginTop: '25px'}} onClick={callMultipleFunctions}>
-      Submit Requests
-    </Button>
-  );
-};
+//   return (
+//     <Button variant='contained' style={{backgroundColor: '#0066ff', marginTop: '25px'}} onClick={callMultipleFunctions}>
+//       Submit Requests
+//     </Button>
+//   );
+// };
 
 
 
@@ -267,10 +267,6 @@ const MyComponentTwo: React.FC = () => {
       <FetchReq requestUrl={geteActivityLogs} bearerToken={bearerToken} buttonLabel="Get Activity Logs" />
       
       {error && <p style={{ color: 'red' }}>Error: {error}</p>}
-
-      
-    
-    
 
     </div>
   );
