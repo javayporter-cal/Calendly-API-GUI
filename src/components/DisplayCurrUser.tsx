@@ -13,7 +13,7 @@ const DisplayCurrUser: React.FC<DisplayPropsType> = (props) => {
   return (
     <div className='parent-flex-box' style={{display: 'flex', justifyContent: 'space-between', width: '55em'}}>
         <div className='two-col-box'>
-            {Object.entries(newObj).map(([key, value]) =>(
+            {Object.entries(newObj).map(([key]) =>(
                 <div className='two-col-box-rows'>
                     {key}
                 </div>

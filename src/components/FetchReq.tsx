@@ -73,7 +73,7 @@ const FetchReq: React.FC<ApiReqPropsType> = (props) => {
 
         return (
           <Button variant='contained' style={{backgroundColor: '#0066ff', marginTop: '25px'}} onClick={callFunc}>
-            {props.buttonLabel}
+            {loading ? 'Loading...' : props.buttonLabel}
           </Button>
         );
       };
