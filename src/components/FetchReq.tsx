@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Button from '@mui/material/Button';
 import ReqResp from './ReqResp';
+import { Box } from '@mui/material';
 
 type ApiReqPropsType = {
     requestUrl: string;
@@ -75,20 +76,20 @@ const FetchReq: React.FC<ApiReqPropsType> = (props) => {
         };
 
         return (
-          <Button variant='contained' style={{backgroundColor: '#0066ff', marginTop: '25px'}} onClick={callFunc}>
+          <Button variant='contained' style={{backgroundColor: '#0066ff', marginTop: '25px', border: '2px solid red'}} onClick={callFunc}>
             {loading ? 'Loading...' : props.buttonLabel}
           </Button>
         );
       };
 
   return (
-    <div>
+    <Box sx={{border: '2px solid purple', maxWidth: '100%'}}>
         <SubmitReq />
         {error && <p style={{ color: 'red' }}>Error: {error}</p>}
         {isVisible && (
         <ReqResp data={apiRes} />
         )}
-    </div>
+    </Box>
   )
 }
 

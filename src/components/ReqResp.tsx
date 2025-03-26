@@ -1,7 +1,6 @@
 import React from 'react';
-import '../App.css';
 import Paper from '@mui/material/Paper';
-import { TableCell, TableContainer, TableHead } from '@mui/material';
+import { Box, TableCell, TableContainer, TableHead } from '@mui/material';
 import TableRow from '@mui/material/TableRow';
 import Table from '@mui/material/Table';
 
@@ -12,9 +11,9 @@ type ReqRespPropsType = {
 const ReqResp: React.FC<ReqRespPropsType> = (props) => {
   return (
     <>
-    <div style={{padding: '10px', margin: '10px' }}>
-        <Paper sx={{ width: '100%', overflow: 'hidden' }}>
-        <TableContainer sx={{ maxHeight: 480 }}>
+    {/* <Box sx={{padding: '10px', margin: '10px', border: '2px solid red'}}>
+        <Paper sx={{ overflow: 'hidden' }}> */}
+        <TableContainer component={Paper} sx={{ maxHeight: 480, overflowX: 'auto' }}>
         <Table stickyHeader aria-label="sticky table">
             <TableHead>
             {Object.entries(props.data).slice(0, 1).map(([key, value]) => (
@@ -38,8 +37,8 @@ const ReqResp: React.FC<ReqRespPropsType> = (props) => {
                     ))}
         </Table>
         </TableContainer>
-        </Paper>
-        </div> 
+        {/* </Paper>
+        </Box>  */}
     </>
   )
 }

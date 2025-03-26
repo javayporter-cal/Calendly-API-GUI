@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import '../index.css';
 import DisplayCurrUser from './DisplayCurrUser';
 import FetchReq from './FetchReq';
+import { Box } from '@mui/material';
 
 const ApiRequestComponent: React.FC = () => {
   const [bearerToken, setBearerToken] = useState<string>('');
@@ -59,7 +59,7 @@ const ApiRequestComponent: React.FC = () => {
   };
 
   return (
-    <div>
+    <Box sx={{border: '3px solid black', maxWidth: '100%'}}>
       
         <TextField 
           // style={{ minWidth: '22em'}}
@@ -77,17 +77,17 @@ const ApiRequestComponent: React.FC = () => {
 
       <DisplayCurrUser currUserData={apiResponse} />
 
-      <FetchReq requestUrl={getOrgMemberships} bearerToken={bearerToken} buttonLabel='Get Organization Users' />
+      {/* <FetchReq requestUrl={getOrgMemberships} bearerToken={bearerToken} buttonLabel='Get Organization Users' />
       <FetchReq requestUrl={getUserAvailSch} bearerToken={bearerToken} buttonLabel="List User's Availability Schedule" />
       <FetchReq requestUrl={getUserSchEvents} bearerToken={bearerToken} buttonLabel="Get User's Scheduled Events" />
       <FetchReq requestUrl={getOrgSchEvents} bearerToken={bearerToken} buttonLabel="Get Organization's Scheduled Events" />
       <FetchReq requestUrl={getUserEventTypes} bearerToken={bearerToken} buttonLabel="Get User's Event Types" />
       <FetchReq requestUrl={getOrgEventTypes} bearerToken={bearerToken} buttonLabel="Get Organization's Event Types" />
-      <FetchReq requestUrl={geteActivityLogs} bearerToken={bearerToken} buttonLabel="Get Activity Logs" />
+      <FetchReq requestUrl={geteActivityLogs} bearerToken={bearerToken} buttonLabel="Get Activity Logs" /> */}
       
       {error && <p style={{ color: 'red' }}>Error: {error}</p>}
 
-    </div>
+    </Box>
   );
 };
 
