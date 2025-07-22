@@ -61,19 +61,19 @@ const ApiRequestComponent: React.FC = () => {
   return (
     <Box sx={{maxWidth: '100%'}}>
       
-        <TextField 
+        {/* <TextField 
           // style={{ minWidth: '22em'}}
           id="outlined-basic" 
           label="Bearer Token"   
           variant="outlined" 
           type="text"
           value={bearerToken}
-          onChange={handleTokenChange}  />
+          onChange={handleTokenChange}  /> */}
   
       
-      <Button variant="outlined" style={{color: '#0066ff'}} onClick={handleApiRequest} disabled={loading}>
+      {/* <Button variant="outlined" style={{color: '#0066ff'}} onClick={handleApiRequest} disabled={loading}>
         {loading ? 'Loading...' : 'Get Current User'}
-      </Button>
+      </Button> */}
 
       <DisplayCurrUser currUserData={apiResponse} />
 

@@ -31,7 +31,7 @@ const DisplayCurrUser: React.FC<DisplayPropsType> = (props) => {
 
     <>
     <TableContainer component={Paper}>
-        <Table sx={{ border: '5px solid orange' }}>
+        <Table>
                 <TableBody>
                     {Object.entries(newObj).map(([key, value]) =>(
                         <TableRow>
