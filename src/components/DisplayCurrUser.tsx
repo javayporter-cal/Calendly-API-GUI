@@ -4,6 +4,7 @@ import TableRow from '@mui/material/TableRow';
 import Table from '@mui/material/Table';
 
 
+
 type DisplayPropsType = {
     currUserData: string;
 }
@@ -14,7 +15,10 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
       wordBreak: 'break-word',
     },
     [theme.breakpoints.up('sm')]: {
-       whiteSpace: 'nowrap',
+       whiteSpace: 'wrap',
+       maxWidth: '200px',
+       textOverflow: 'ellipsis',
+   
     }
   }));
 
