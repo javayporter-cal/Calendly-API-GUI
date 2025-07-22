@@ -1,29 +1,34 @@
 import { Box } from '@mui/material';
-import React from 'react'
-import ApiRequestComponent from './ApiReqComp';
-
-// const Feed = () => {
-//   return (
-//     <Box bgcolor={'yellow'} flex={4} p={2}>
-//         <ApiRequestComponent />
-//     </Box>
-//   )
-// }
-
+import AuthControls from './AuthControls';
+import { useState } from 'react';
 
 
 const Feed = () => {
+  const [bearerToken, setBearerToken] = useState('');
+
+  // For now this just logs - replace with your actual logic later
+  const handleGetCurrentUser = () => {
+    console.log('Getting current user with token:', bearerToken);
+    // You can pass bearerToken to FetchReq or trigger an API call
+  };
+
+  const handleOAuthConnect = () => {
+    console.log('Redirect to Calendly OAuth flow');
+    // In the future: redirect to Calendly OAuth endpoint
+  };
+
   return (
-    <Box
-      sx={{
-        maxWidth: '1000px', // adjust as needed
-        overflowX: 'auto',
-        bgcolor: 'yellow',
-        p: 2,
-        flex: 4,
-      }}
-    >
-      <ApiRequestComponent />
+    <Box bgcolor={'#f9f9f9'} flex={4} p={2}>
+      <AuthControls
+  bearerToken={bearerToken}
+  onTokenChange={setBearerToken}
+  onGetCurrentUser={handleGetCurrentUser}
+  onOAuthConnect={handleOAuthConnect}
+/>
+
+
+
+
     </Box>
   );
 };

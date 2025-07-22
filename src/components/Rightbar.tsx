@@ -1,10 +1,22 @@
 import { Box } from '@mui/material'
-import React from 'react'
+import ApiRequestComponent from './ApiReqComp';
 
 const Rightbar = () => {
   return (
-    <Box bgcolor={'orange'} flex={2} p={2} sx={{display: {xs: 'none', sm: 'block'} }}>Rightbar</Box>
-  )
+    <Box
+      sx={{
+        maxWidth: '1000px', // adjust as needed
+        overflowX: 'auto',
+        p: 2,
+        flex: 2,
+      }}
+    >
+      <ApiRequestComponent  />
+    </Box>
+  );
 }
 
-export default Rightbar
+
+export default Rightbar;
+
+

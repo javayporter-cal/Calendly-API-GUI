@@ -59,7 +59,7 @@ const ApiRequestComponent: React.FC = () => {
   };
 
   return (
-    <Box sx={{border: '3px solid black', maxWidth: '100%'}}>
+    <Box sx={{maxWidth: '100%'}}>
       
         <TextField 
           // style={{ minWidth: '22em'}}
@@ -92,3 +92,4 @@ const ApiRequestComponent: React.FC = () => {
 };
 
 export default ApiRequestComponent;
+

@@ -95,7 +95,102 @@
 
 // export default FetchReq
 
-import React, { useState, useEffect, useRef } from 'react';
+// import React, { useState, useEffect, useRef } from 'react';
+// import Button from '@mui/material/Button';
+// import ReqResp from './ReqResp';
+// import { Box } from '@mui/material';
+
+// type ApiReqPropsType = {
+//   requestUrl: string;
+//   orgUri?: string;
+//   userUri?: string;
+//   bearerToken: string;
+//   buttonLabel: string;
+//   handleApiRequest?: () => void;
+// };
+
+// const FetchReq: React.FC<ApiReqPropsType> = (props) => {
+//   const [apiRes, setApiRes] = useState<Record<string, any> | null>(null);
+//   const [loading, setLoading] = useState(false);
+//   const [error, setError] = useState<string | null>(null);
+//   const [isVisible, setIsVisible] = useState(false);
+
+//   const divRef = useRef<HTMLDivElement>(null);
+
+//   const handleClickOutside = (event: MouseEvent) => {
+//     if (divRef.current && !divRef.current.contains(event.target as Node)) {
+//       setIsVisible(false);
+//     }
+//   };
+
+//   useEffect(() => {
+//     document.addEventListener('mousedown', handleClickOutside);
+//     return () => {
+//       document.removeEventListener('mousedown', handleClickOutside);
+//     };
+//   }, []);
+
+//   const handleApiReq = async () => {
+//     setLoading(true);
+//     setError(null);
+
+//     try {
+//       const response = await fetch(props.requestUrl, {
+//         method: 'GET',
+//         headers: {
+//           Authorization: `Bearer ${props.bearerToken}`,
+//           'Content-Type': 'application/json',
+//         },
+//       });
+
+//       if (!response.ok) {
+//         throw new Error(`API request failed with status ${response.status}`);
+//       }
+
+//       const textData = await response.text();
+//       const jsonData = JSON.parse(textData);
+//       const collectionData = jsonData?.collection ?? {};
+//       setApiRes(collectionData);
+
+//       console.log('API response collection:', collectionData);
+//       console.log('Type:', typeof collectionData);
+//     } catch (err) {
+//       setError((err as Error).message);
+//       setApiRes(null);
+//     } finally {
+//       setLoading(false);
+//     }
+//   };
+
+//   const SubmitReq: React.FC = () => {
+//     const callFunc = () => {
+//       handleApiReq();
+//       setIsVisible(!isVisible);
+//     };
+
+//     return (
+//       <Button
+//         variant="contained"
+//         style={{ backgroundColor: '#0066ff', marginTop: 25, border: '2px solid red' }}
+//         onClick={callFunc}
+//       >
+//         {loading ? 'Loading...' : props.buttonLabel}
+//       </Button>
+//     );
+//   };
+
+//   return (
+//     <Box ref={divRef} sx={{ border: '2px solid purple', maxWidth: '100%' }}>
+//       <SubmitReq />
+//       {error && <p style={{ color: 'red' }}>Error: {error}</p>}
+//       {isVisible && apiRes && <ReqResp data={apiRes} />}
+//     </Box>
+//   );
+// };
+
+// export default FetchReq;
+
+import React, { useState } from 'react';
 import Button from '@mui/material/Button';
 import ReqResp from './ReqResp';
 import { Box } from '@mui/material';
@@ -113,22 +208,7 @@ const FetchReq: React.FC<ApiReqPropsType> = (props) => {
   const [apiRes, setApiRes] = useState<Record<string, any> | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [isVisible, setIsVisible] = useState(false);
-
-  const divRef = useRef<HTMLDivElement>(null);
-
-  const handleClickOutside = (event: MouseEvent) => {
-    if (divRef.current && !divRef.current.contains(event.target as Node)) {
-      setIsVisible(false);
-    }
-  };
-
-  useEffect(() => {
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, []);
+  const [isModalOpen, setIsModalOpen] = useState(false); // ✅ controls modal visibility
 
   const handleApiReq = async () => {
     setLoading(true);
@@ -150,10 +230,9 @@ const FetchReq: React.FC<ApiReqPropsType> = (props) => {
       const textData = await response.text();
       const jsonData = JSON.parse(textData);
       const collectionData = jsonData?.collection ?? {};
-      setApiRes(collectionData);
-
+      setApiRes(collectionData);             // ✅ store data
+      setIsModalOpen(true);                  // ✅ open modal
       console.log('API response collection:', collectionData);
-      console.log('Type:', typeof collectionData);
     } catch (err) {
       setError((err as Error).message);
       setApiRes(null);
@@ -162,28 +241,26 @@ const FetchReq: React.FC<ApiReqPropsType> = (props) => {
     }
   };
 
-  const SubmitReq: React.FC = () => {
-    const callFunc = () => {
-      handleApiReq();
-      setIsVisible(!isVisible);
-    };
-
-    return (
+  return (
+    <Box sx={{maxWidth: '100%' }}>
       <Button
         variant="contained"
-        style={{ backgroundColor: '#0066ff', marginTop: 25, border: '2px solid red' }}
-        onClick={callFunc}
+        style={{ backgroundColor: 'primary', marginTop: 25 }}
+        onClick={handleApiReq}
       >
         {loading ? 'Loading...' : props.buttonLabel}
       </Button>
-    );
-  };
 
-  return (
-    <Box ref={divRef} sx={{ border: '2px solid purple', maxWidth: '100%' }}>
-      <SubmitReq />
       {error && <p style={{ color: 'red' }}>Error: {error}</p>}
-      {isVisible && apiRes && <ReqResp data={apiRes} />}
+
+      {/* ✅ Show modal if data is fetched */}
+      {apiRes && (
+        <ReqResp
+          data={apiRes}
+          open={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+        />
+      )}
     </Box>
   );
 };

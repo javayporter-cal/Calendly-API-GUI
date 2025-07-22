@@ -5,7 +5,7 @@ const Navbar = () => {
   return (
     <AppBar position='sticky' color='primary'>
         <Toolbar>
-            Navbar
+            Calendly Oauth/API Help App
         </Toolbar>
     </AppBar>
   )
