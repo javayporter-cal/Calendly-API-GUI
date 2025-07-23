@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Box, Button } from '@mui/material';
 import PostEventModal from './PostEventModal';
 //import { useCalendlyContext } from '../context/CalendlyContext';

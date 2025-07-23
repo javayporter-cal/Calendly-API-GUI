@@ -7,9 +7,9 @@ import { useCalendlyContext } from '../context/CalendlyContext';
 const ApiRequestComponent: React.FC = () => {
 
   const { bearerToken, orgUri, userUri } = useCalendlyContext();
-  const [apiResponse, setApiResponse] = useState<string>('');
-  const [loading, setLoading] = useState<boolean>(false);
-  const [error, setError] = useState<string | null>(null);
+  // const [apiResponse, setApiResponse] = useState<string>('');
+  // const [loading, setLoading] = useState<boolean>(false);
+  //const [error, setError] = useState<string | null>(null);
   
   const getOrgMemberships: string = `https://api.calendly.com/organization_memberships?organization=${orgUri}`;
   const getUserAvailSch: string = `https://api.calendly.com/user_availability_schedules?user=${userUri}`;
@@ -24,8 +24,6 @@ const ApiRequestComponent: React.FC = () => {
     <Box sx={{maxWidth: '100%'}}>
       
 
-      <DisplayCurrUser currUserData={apiResponse} />
-
       <FetchReq requestUrl={getOrgMemberships} bearerToken={bearerToken} buttonLabel='Get Organization Users' />
       <FetchReq requestUrl={getUserAvailSch} bearerToken={bearerToken} buttonLabel="List User's Availability Schedule" />
       <FetchReq requestUrl={getUserSchEvents} bearerToken={bearerToken} buttonLabel="Get User's Scheduled Events" />
@@ -34,7 +32,8 @@ const ApiRequestComponent: React.FC = () => {
       <FetchReq requestUrl={getOrgEventTypes} bearerToken={bearerToken} buttonLabel="Get Organization's Event Types" />
       <FetchReq requestUrl={geteActivityLogs} bearerToken={bearerToken} buttonLabel="Get Activity Logs" />
       
-      {error && <p style={{ color: 'red' }}>Error: {error}</p>}
+      {/* {error && <p style={{ color: 'red' }}>Error: {error}</p>} */}
+      
 
     </Box>
   );
