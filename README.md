@@ -27,7 +27,7 @@ This tool is designed to make it easier for developers—especially those new to
 1. **Clone the repo**  
    ```bash
    git clone https://github.com/javayporter-cal/Calendly-API-GUI.git
-   cd YOUR_REPO_NAME
+   cd 'Calendly APi GUI'
 - Install dependencies
 - npm install
 - Run the app locally
