@@ -2,13 +2,34 @@ import { Box } from '@mui/material';
 import AuthControls from './AuthControls';
 import { useState } from 'react';
 import DisplayCurrUser from './DisplayCurrUser';
+import { useCalendlyContext } from '../context/CalendlyContext';
+
 
 
 const Feed = () => {
-  const [bearerToken, setBearerToken] = useState('');
+  const {
+    bearerToken,
+    setBearerToken,
+    orgUri,
+    setOrgUri,
+    userUri,
+    setUserUri,
+  } = useCalendlyContext();
+
+ // const [bearerToken, setBearerToken] = useState('');
   const [apiResponse, setApiResponse] = useState<string>('');
+  // const [orgUri, setOrgUri] = useState<string>('');
+  // const [userUri, setUserUri] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
+  
+  const getOrgMemberships: string = `https://api.calendly.com/organization_memberships?organization=${orgUri}`;
+  const getUserAvailSch: string = `https://api.calendly.com/user_availability_schedules?user=${userUri}`;
+  const getUserSchEvents: string = `https://api.calendly.com/scheduled_events?user=${userUri}`;
+  const getOrgSchEvents: string = `https://api.calendly.com/scheduled_events?organization=${orgUri}`;
+  const getOrgEventTypes: string = `https://api.calendly.com/event_types?organization=${orgUri}`;
+  const getUserEventTypes: string = `https://api.calendly.com/event_types?user=${userUri}`;
+  const geteActivityLogs: string = `https://api.calendly.com/activity_log_entries?organization=${orgUri}`;
 
   // For now this just logs - replace with your actual logic later
   const handleGetCurrentUser = async () => {
@@ -34,6 +55,8 @@ const Feed = () => {
       const jsonObject = JSON.parse(data);
       const testObj = jsonObject['resource'];
       setApiResponse(testObj);
+      setOrgUri(testObj['current_organization']);
+      setUserUri(testObj['uri']);
       
     } catch (err) {
       setError((err as Error).message);

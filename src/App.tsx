@@ -3,9 +3,11 @@ import Feed from './components/Feed';
 import Rightbar from './components/Rightbar';
 import Navbar from './components/Navbar';
 import { Box, Stack } from '@mui/material';
+import { CalendlyProvider } from './context/CalendlyContext';
 
 function App() {
   return (
+    <CalendlyProvider>
     <Box>
       {/* Top Navigation Bar */}
       <Navbar />
@@ -17,6 +19,7 @@ function App() {
         <Rightbar />
       </Stack>
     </Box>
+    </CalendlyProvider>
   );
 }
 
