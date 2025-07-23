@@ -1,50 +1,78 @@
-# React + TypeScript + Vite
+# 📅 Calendly API Playground
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A beginner-friendly React + TypeScript app that helps developers explore and test Calendly’s API with a clean UI and real-time feedback.
 
-Currently, two official plugins are available:
+This tool is designed to make it easier for developers—especially those new to APIs—to send authenticated GET and POST requests to Calendly’s API, view results in a modal, and learn how to use the endpoints in their own projects.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## ✨ Features
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- 🔑 Add your personal Calendly API token
+- 📬 Send GET and POST requests with one click
+- 🧾 View raw response data and formatted output in a modal
+- 🧠 Friendly UI designed for beginners
+- 🛠 Built in React + TypeScript
 
-- Configure the top-level `parserOptions` property like this:
+---
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+## 🚀 Live Demo
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+> Coming soon — deployed with [Vercel](https://vercel.com)
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+---
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+## 🛠 How to Use
+
+1. **Clone the repo**  
+   ```bash
+   git clone https://github.com/YOUR_USERNAME/YOUR_REPO_NAME.git
+   cd YOUR_REPO_NAME
+Install dependencies
+npm install
+Run the app locally
+npm run dev
+Add your Calendly API token to the input field and start exploring!
+
+
+
+🧪 Endpoints Included
+Currently supports:
+GET your user information
+GET your scheduled events
+POST (e.g. create webhook subscriptions)
+
+
+More endpoints coming soon!
+
+📚 Who Is This For?
+New developers learning how to work with APIs
+Engineers integrating Calendly into their tools or platforms
+Anyone who wants a lightweight Postman-style UI for Calendly
+
+
+
+🧰 Tech Stack
+React
+TypeScript
+Vite
+Styled with CSS (custom or framework TBD)
+
+
+
+📦 Future Features (Roadmap)
+Friendly error logging with fix suggestions
+Copy-ready fetch()/axios code snippets
+Request history + replay
+Mock mode (no token required)
+API walkthroughs for beginners
+Shareable request configurations
+Follow the project roadmap (coming soon) for more.
+
+🙌 Contributing
+Pull requests are welcome! If you have ideas for improving the UI, adding endpoint support, or simplifying the learning experience, feel free to open an issue or submit a PR.
+
+📄 License
+MIT License
+
+
