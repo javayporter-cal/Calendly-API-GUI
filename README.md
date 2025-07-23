@@ -28,45 +28,48 @@ This tool is designed to make it easier for developers—especially those new to
    ```bash
    git clone https://github.com/YOUR_USERNAME/YOUR_REPO_NAME.git
    cd YOUR_REPO_NAME
-Install dependencies
-npm install
-Run the app locally
-npm run dev
+- Install dependencies
+- npm install
+- Run the app locally
+- npm run dev
+
 Add your Calendly API token to the input field and start exploring!
 
 
 
 🧪 Endpoints Included
 Currently supports:
-GET your user information
-GET your scheduled events
-POST (e.g. create webhook subscriptions)
+
+- GET your user information
+- GET your scheduled events
+- POST (e.g. create webhook subscriptions)
 
 
 More endpoints coming soon!
 
 📚 Who Is This For?
-New developers learning how to work with APIs
-Engineers integrating Calendly into their tools or platforms
-Anyone who wants a lightweight Postman-style UI for Calendly
+- New developers learning how to work with APIs
+- Engineers integrating Calendly into their tools or platforms
+- Anyone who wants a lightweight Postman-style UI for Calendly
 
 
 
 🧰 Tech Stack
-React
-TypeScript
-Vite
-Styled with CSS (custom or framework TBD)
+- React
+- TypeScript
+- Vite
+- Styled with CSS (custom or framework TBD)
 
 
 
 📦 Future Features (Roadmap)
-Friendly error logging with fix suggestions
-Copy-ready fetch()/axios code snippets
-Request history + replay
-Mock mode (no token required)
-API walkthroughs for beginners
-Shareable request configurations
+- Friendly error logging with fix suggestions
+- Copy-ready fetch()/axios code snippets
+- Request history + replay
+- Mock mode (no token required)
+- API walkthroughs for beginners
+- Shareable request configurations
+
 Follow the project roadmap (coming soon) for more.
 
 🙌 Contributing
