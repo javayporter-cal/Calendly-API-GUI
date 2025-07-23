@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { Box, Button } from '@mui/material';
 import PostEventModal from './PostEventModal';
+//import { useCalendlyContext } from '../context/CalendlyContext';
+
 
 const Sidebar = () => {
   const [modalOpen, setModalOpen] = useState(false);
 
-  const bearerToken = import.meta.env.VITE_CALENDLY_TOKEN as string;
-
+  //const { bearerToken } = useCalendlyContext();
   const handleOpen = () => setModalOpen(true);
   const handleClose = () => setModalOpen(false);
 
@@ -17,7 +18,7 @@ const Sidebar = () => {
         Create Event Type
       </Button>
 
-      <PostEventModal open={modalOpen} handleClose={handleClose} bearerToken={bearerToken} />
+      <PostEventModal open={modalOpen} handleClose={handleClose}  />
     </Box>
   );
 };

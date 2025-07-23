@@ -1,31 +1,39 @@
 // src/components/PostEventModal.tsx
 import React, { useState } from 'react';
 import { Box, Button, Modal, TextField, Typography } from '@mui/material';
+import { useCalendlyContext } from '../context/CalendlyContext';
+
 
 type PostEventModalProps = {
   open: boolean;
   handleClose: () => void;
-  bearerToken: string;
 };
 
 const style = {
-  position: 'absolute' as const,
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 400,
-  bgcolor: 'background.paper',
-  boxShadow: 24,
-  p: 4,
-  borderRadius: 2,
-};
+    position: 'absolute' as const,
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 400,
+    maxHeight: '80vh',           // ✅ limit height to 80% of viewport
+    overflowY: 'auto',           // ✅ enable vertical scroll if needed
+    bgcolor: 'background.paper',
+    boxShadow: 24,
+    p: 4,
+    borderRadius: 2,
+  };
 
-const PostEventModal: React.FC<PostEventModalProps> = ({ open, handleClose, bearerToken }) => {
+const PostEventModal: React.FC<PostEventModalProps> = ({ open, handleClose }) => {
+
+    const { bearerToken, userUri } = useCalendlyContext();
+
   const [name, setName] = useState('');
-  const [slug, setSlug] = useState('');
+  const owner = userUri;
   const [description, setDescription] = useState('');
   const [response, setResponse] = useState('');
   const [loading, setLoading] = useState(false);
+
+  
 
   const handleSubmit = async () => {
     setLoading(true);
@@ -33,7 +41,7 @@ const PostEventModal: React.FC<PostEventModalProps> = ({ open, handleClose, bear
 
     const body = {
       name,
-      slug,
+      owner,
       description,
       // Add other required fields as needed
     };
@@ -67,13 +75,6 @@ const PostEventModal: React.FC<PostEventModalProps> = ({ open, handleClose, bear
           label="Name"
           value={name}
           onChange={(e) => setName(e.target.value)}
-        />
-        <TextField
-          fullWidth
-          margin="normal"
-          label="Slug"
-          value={slug}
-          onChange={(e) => setSlug(e.target.value)}
         />
         <TextField
           fullWidth
