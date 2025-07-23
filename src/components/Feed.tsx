@@ -3,6 +3,8 @@ import AuthControls from './AuthControls';
 import { useState } from 'react';
 import DisplayCurrUser from './DisplayCurrUser';
 import { useCalendlyContext } from '../context/CalendlyContext';
+import IntroSection from './IntroSection';
+
 
 
 
@@ -71,6 +73,7 @@ const Feed = () => {
 
   return (
     <Box bgcolor={'#f9f9f9'} flex={4} p={2}>
+      <IntroSection />
       <AuthControls
   bearerToken={bearerToken}
   onTokenChange={setBearerToken}
