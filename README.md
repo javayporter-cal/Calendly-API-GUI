@@ -18,7 +18,7 @@ This tool is designed to make it easier for developers—especially those new to
 
 ## 🚀 Live Demo
 
-> Coming soon — deployed with [Vercel](https://vercel.com)
+> Deployed with [Vercel](https://calendly-api-gui.vercel.app/)
 
 ---
 
@@ -26,7 +26,7 @@ This tool is designed to make it easier for developers—especially those new to
 
 1. **Clone the repo**  
    ```bash
-   git clone https://github.com/YOUR_USERNAME/YOUR_REPO_NAME.git
+   git clone https://github.com/javayporter-cal/Calendly-API-GUI.git
    cd YOUR_REPO_NAME
 - Install dependencies
 - npm install
