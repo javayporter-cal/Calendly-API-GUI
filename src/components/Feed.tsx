@@ -10,9 +10,7 @@ const Feed = () => {
   const {
     bearerToken,
     setBearerToken,
-    orgUri,
     setOrgUri,
-    userUri,
     setUserUri,
   } = useCalendlyContext();
 
@@ -59,7 +57,7 @@ const Feed = () => {
       setUserUri(testObj['uri']);
       
     } catch (err) {
-      setError((err as Error).message);
+      //setError((err as Error).message);
       setApiResponse('');
     } finally {
       //setLoading(false);

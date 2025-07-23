@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import DisplayCurrUser from './DisplayCurrUser';
+import React from 'react';
 import FetchReq from './FetchReq';
 import { Box } from '@mui/material';
 import { useCalendlyContext } from '../context/CalendlyContext';
