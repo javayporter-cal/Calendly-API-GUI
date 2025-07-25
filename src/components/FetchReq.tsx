@@ -10,6 +10,7 @@ type ApiReqPropsType = {
   bearerToken: string;
   buttonLabel: string;
   handleApiRequest?: () => void;
+  onSuccess?: (data: any) => void;   // <-- NEW
 };
 
 const FetchReq: React.FC<ApiReqPropsType> = (props) => {
@@ -40,7 +41,14 @@ const FetchReq: React.FC<ApiReqPropsType> = (props) => {
       const collectionData = jsonData?.collection ?? {};
       setApiRes(collectionData);             // ✅ store data
       setIsModalOpen(true);                  // ✅ open modal
-      console.log('API response collection:', collectionData);
+
+       // hand the raw API data back to the caller so it can be cached in context
+       props.onSuccess?.(collectionData);
+       if (props.onSuccess) {
+        console.log('[FetchReq] onSuccess payload:', collectionData);
+        props.onSuccess(collectionData);
+      }
+      
     } catch (err) {
       setError((err as Error).message);
       setApiRes(null);
