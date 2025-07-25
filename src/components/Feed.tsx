@@ -12,8 +12,6 @@ const Feed = () => {
     setBearerToken,
     setOrgUri,
     setUserUri,
-    orgMembers,
-    setOrgMembers
 
   } = useCalendlyContext();
 
@@ -52,7 +50,7 @@ const Feed = () => {
     }
 
 
-    
+
   };
 
   const handleOAuthConnect = () => {
